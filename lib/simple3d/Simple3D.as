@@ -58,7 +58,7 @@ package simple3d
 				face.updateRenderData();
 				graphics.lineStyle(0.1, 0x888888);
 				graphics.beginBitmapFill(face.texture);
-				graphics.drawTriangles(face.renderData, face.indices, face.uv, TriangleCulling.POSITIVE);
+				graphics.drawTriangles(face.renderData, face.indices, face.uv, TriangleCulling.NONE);
 			}
 		}
 		

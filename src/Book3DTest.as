@@ -4,6 +4,7 @@ package
 	import simple3d.app.Book3D;
 	import simple3d.core.Container3D;
 	import simple3d.core.Vertex;
+	import simple3d.primity.Cube;
 	import simple3d.primity.Plane;
 	import simple3d.utils.VectorUtils;
 	/**
@@ -46,8 +47,22 @@ package
 			p.rotation.y = Math.PI / 2;
 			b3d.add(p);
 			
-			s3d.add(b3d);
+			var cube : Cube;
 			
+			for (var i: int = 0; i < 4; i++) {
+				cube = new Cube(bm, 100, 100);
+				cube.y = 100;
+				cube.x = (i % 2 == 0) ? 100 : -100;
+				cube.z = (i < 2) ? 100: -100;
+				b3d.add(cube);
+			}
+			
+			cube = new Cube(bm, 100, 100);
+			cube.y = 800;
+			b3d.add(cube);
+			
+			s3d.add(b3d);
+			b3d.y = -300;
 			//s3d.alpha = 0.85;
 		}
 		
