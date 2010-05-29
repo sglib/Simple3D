@@ -1,4 +1,4 @@
-package  
+package test.core
 {
 	import flash.events.Event;
 	import model.Kappa;
@@ -10,6 +10,7 @@ package
 	public class ExModelTest extends Simple3DTest
 	{
 		
+		
 		public function ExModelTest() 
 		{
 			
@@ -19,9 +20,9 @@ package
 		
 		override public function setup3d():void 
 		{
-			kappa = new Kappa(bm);
-			
+			kappa = new Kappa();
 			s3d.add(kappa);
+			kappa.y = -200;
 		}
 	}
 

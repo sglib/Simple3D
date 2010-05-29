@@ -35,12 +35,12 @@ package simple3d.app
 			_facesObject = new Vector.<Polygon>;
 			
 			leftPage = new Plane(new BitmapData(w, h, false, 0x0000ff), w, h);
-			leftPage.x = -100;
+			leftPage.x = -w/4;
 			leftPage.rotation.y = Math.PI / 2;
 			leftPage.rotation.z = Math.PI / 2;
 			
 			rightPage = new Plane(new BitmapData(w, h, false, 0xff0000), w, h);
-			rightPage.x = 100;
+			rightPage.x = w/4;
 			rightPage.rotation.y = Math.PI / 2;
 			rightPage.rotation.z = Math.PI / 2;
 			

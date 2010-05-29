@@ -1,6 +1,7 @@
 package simple3d.core 
 {
 	import flash.geom.Matrix3D;
+	import flash.geom.Vector3D;
 	import simple3d.utils.MathUtils;
 	import simple3d.utils.VectorUtils;
 	/**
@@ -64,7 +65,14 @@ package simple3d.core
 			if (parent) {
 				MathUtils.prependTrans(parent.transG, transG);
 				//MathUtils.transVertex(parent.transG, this);
-			}
+			} 
+			
+			//else {//append itself transform viewed from an empty non rotated / non moved parent
+				//var tmp : Vector.<Number> = new Matrix3D().rawData;
+				//MathUtils.findTrans(tmp, new V3D(), new V3D(x, y, z));
+				//trace('non parent :: ', tmp);
+				//MathUtils.prependTrans(tmp, transG);
+			//}
 			
 			MathUtils.transVertex(transG, this);
 			

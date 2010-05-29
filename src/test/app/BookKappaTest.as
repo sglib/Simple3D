@@ -1,4 +1,4 @@
-package  
+package test.app
 {
 	import aze.motion.eaze;
 	import flash.events.Event;
@@ -23,18 +23,13 @@ package
 		
 		override public function setup3d():void 
 		{
-			b3d = new Book3D(bm, 400, 200);
-			var kappa : Kappa = new Kappa(bm);
-			
-			s3d.world.y = -50;
-			
+			b3d = new Book3D(null, 600, 300);
+			var kappa : Kappa = new Kappa();
 			b3d.add(kappa);
+			
+			b3d.y = -200;
+			
 			s3d.add(b3d);
-			
-			b3d.angle = Math.PI;
-			
-			
-			
 			stage.addEventListener(MouseEvent.CLICK, onClick);
 		}
 		
@@ -47,8 +42,6 @@ package
 		
 		override protected function _enterframe(e:Event):void 
 		{
-			//b3d.angle = stage.mouseY / stage.stageHeight * Math.PI;
-			//b3d.angle = Math.min(Math.PI, Math.max(0, b3d.angle));
 			super._enterframe(e);
 		}
 		

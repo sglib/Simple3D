@@ -1,4 +1,4 @@
-package  
+package test.core
 {
 	import flash.events.Event;
 	import simple3d.core.Model3D;
@@ -21,23 +21,23 @@ package
 		override public function setup3d():void 
 		{
 			m3d = new Model3D();
-			var p : Plane = new Plane(bm, 200, 200);
+			var p : Plane = new Plane(null, 200, 200);
 			p.x = 100;
-			p.y = 100;
+			p.y = -50;
 			m3d.add(p);
 			
-			p = new Plane(bm, 200, 200);
+			p = new Plane(null, 200, 200);
 			p.x = -100;
-			p.y = 100;
+			p.y = 50;
 			m3d.add(p);
 			
-			p = new Plane(bm, 200, 200);
+			p = new Plane(null, 200, 200);
 			p.z = -100;
-			p.y = 100;
+			p.y = 0;
 			p.rotation.y = Math.PI / 2;
 			m3d.add(p);
 			
-			p = new Plane(bm, 200, 200);
+			p = new Plane(null, 200, 200);
 			p.z = 100;
 			p.y = 100;
 			p.rotation.y = Math.PI / 2;
@@ -45,12 +45,6 @@ package
 			
 			s3d.add(m3d);
 		}
-		
-		//override protected function _enterframe(e:Event):void 
-		//{
-			//m3d.rotation.y += 0.05;
-			//s3d.world.rotation.x = stage.mouseY / stage.stageHeight * Math.PI/2-Math.PI/4;
-		//}
 		
 	}
 

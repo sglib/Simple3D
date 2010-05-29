@@ -1,4 +1,4 @@
-package  
+package test.primity
 {
 	import flash.events.Event;
 	import simple3d.primity.Cube;
@@ -18,16 +18,19 @@ package
 		
 		override public function setup3d():void 
 		{
-			cube = new Cube(bm, 200, 200, 200);
+			cube = new Cube(null, 200, 200, 200);
 			s3d.add(cube);
 		}
 		
 		override protected function _enterframe(e:Event):void 
 		{
-			cube.rotation.x += 0.05;
-			cube.rotation.y += 0.01;
-			cube.x = stage.mouseX - stage.stageWidth / 2;
-			cube.y = -stage.mouseY + stage.stageHeight / 2;
+			//cube.rotation.x += 0.05;
+			//cube.rotation.y += 0.05;
+			//cube.rotation.z += 0.05;
+			
+			cube.z = 200;
+			
+			super._enterframe(null);
 		}
 		
 	}

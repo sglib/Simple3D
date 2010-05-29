@@ -1,5 +1,6 @@
-package  
+package test.core
 {
+	import aze.motion.eaze;
 	import flash.events.Event;
 	import simple3d.core.Container3D;
 	import simple3d.primity.Cube;
@@ -24,11 +25,10 @@ package
 		override public function setup3d():void 
 		{
 			c = new Container3D();
-			p = new Plane(bm);
-			p2 = new Plane(bm);
-			cube = new Cube(bm, 200, 200, 200);
+			p = new Plane(null, 400, 400);
+			p2 = new Plane(null, 400, 400);
+			cube = new Cube(null, 200, 200, 200);
 			cube.z = -105;
-			
 			p2.z = - 210;
 			
 			c.add(cube);
@@ -37,22 +37,16 @@ package
 			
 			s3d.add(c);
 			
-			//s3d.alpha = 0.75;
+			c.z = 300;
 		}
 		
 		override protected function _enterframe(e:Event):void 
 		{
-			p2.rotation.z += 0.1;
-			//cube.rotation.y += 0.05;
-			//cube.rotation.x += 0.05;
-			//cube.rotation.z += 0.01;
-			//p.x = bm.width/2;
+			p2.rotation.z += 0.05;
+			p.rotation.z -= 0.05;
+			cube.rotation.z += 0.1;
 			
-			c.rotation.x += 0.01;
-			//c.rotation.z += 0.01;
-			//c.rotation.y += 0.01;
-			//c.x = stage.mouseX - stage.stageWidth / 2;
-			//c.y = stage.mouseY - stage.stageHeight / 2;
+			super._enterframe(e);
 		}
 		
 	}

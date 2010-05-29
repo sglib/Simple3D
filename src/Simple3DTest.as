@@ -15,20 +15,14 @@ package
 	public class Simple3DTest extends MovieClip
 	{
 		public var s3d	: Simple3D;
-		public var bm	: BitmapData;
-		
-		[Embed(source="kappa.png")]
-		private var DINO	: Class;
 		
 		public function Simple3DTest() 
 		{
 			s3d = new Simple3D();
-			bm = //new BitmapData(640, 480, false, 0xff5555ff);
-			(new DINO() as Bitmap).bitmapData;
 			
 			addChild(s3d);			
 			s3d.x = stage.stageWidth / 2;
-			s3d.y = stage.stageHeight / 2 + 200;
+			s3d.y = stage.stageHeight / 2;
 			
 			setup3d();
 			
@@ -59,7 +53,7 @@ package
 		
 		protected function _enterframe(e:Event):void 
 		{
-			s3d.world.rotation.y += (ty -s3d.world.rotation.y) / 5;
+			s3d.world.rotation.y += (ty -s3d.world.rotation.y) / 20;
 		}
 		
 	}

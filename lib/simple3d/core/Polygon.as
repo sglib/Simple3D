@@ -31,7 +31,7 @@ package simple3d.core
 				uv = puv;
 			}
 			
-			if (texture == null) trace('null texture :: need to create one');
+			//if (texture == null) trace('null texture :: need to create one');
 			//uv.fixed = true;
 			//vertices.fixed = true;
 		}

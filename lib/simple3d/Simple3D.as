@@ -42,10 +42,17 @@ package simple3d
 			
 			world.updateTransform();//apply transform on vertices
 			
+			var tmpZ : int = focus + world.z - camZ;
+			
 			//do project
 			for (var i: int = 0; i < vertices.length; i++) {
 				v = vertices[i];
-				f = focus / (focus + v.tz - camZ);
+				
+				f = focus / (tmpZ + v.tz);
+				
+				v.tx += world.x;//is this the bug ?
+				v.ty += world.y;
+				
 				v.gx = f * v.tx * zoom;
 				v.gy = f * v.ty * zoom;
 			}
@@ -57,10 +64,10 @@ package simple3d
 			for (i = 0; i < l ; i++) {
 				face = faces[i];
 				face.updateRenderData();
-				//graphics.lineStyle(0.1, 0x888888);
+				graphics.lineStyle(0.1, 0xff0000);
 				
 				if (face.texture == null) {
-					trace('null texture detected :: ', i);
+					//trace('null texture detected :: ', i);
 					face.texture = new BitmapData(10, 10, false, Math.random()*0xffffff);
 				}
 				
