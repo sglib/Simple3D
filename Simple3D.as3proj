@@ -67,11 +67,12 @@
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="src\ExModelTest.as" />
+    <compile path="src\BookKappaTest.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
     <hidden path="src\DINO_2.GIF" />
+    <hidden path="src\kappa.png" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand />

@@ -26,8 +26,12 @@ package simple3d.core
 			if (vertices.length == 4 && pindices == null && puv == null) {
 				indices = Vector.<int>([0, 1, 3, 1, 2, 3]);
 				uv = Vector.<Number>([0,0, 1,0, 1,1, 0,1]);				
+			} else {
+				indices = pindices;
+				uv = puv;
 			}
 			
+			if (texture == null) trace('null texture :: need to create one');
 			//uv.fixed = true;
 			//vertices.fixed = true;
 		}

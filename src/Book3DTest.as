@@ -60,20 +60,16 @@ package
 			cube = new Cube(bm, 100, 100);
 			cube.y = 800;
 			b3d.add(cube);
+			s3d.world.y = -200;
 			
 			s3d.add(b3d);
-			b3d.y = -300;
-			//s3d.alpha = 0.85;
 		}
 		
 		override protected function _enterframe(e:Event):void 
 		{
-			b3d.rotation.y += 0.02;
-			//b3d.leftAngle = stage.mouseX / stage.width * Math.PI / 4;
-			//b3d.ratio = stage.mouseX / stage.stageWidth;
-			
-			b3d.angle = stage.mouseX/stage.stageWidth * Math.PI;
-			s3d.world.rotation.x = stage.mouseY / stage.stageHeight * Math.PI/2-Math.PI/4;
+			b3d.angle = stage.mouseY / stage.stageHeight * Math.PI;
+			b3d.angle = Math.min(Math.PI, Math.max(0, b3d.angle));
+			super._enterframe(e);
 		}
 		
 	}

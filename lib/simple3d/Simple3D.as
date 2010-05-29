@@ -1,5 +1,6 @@
 package simple3d 
 {
+	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.display.TriangleCulling;
 	import flash.events.Event;
@@ -56,9 +57,15 @@ package simple3d
 			for (i = 0; i < l ; i++) {
 				face = faces[i];
 				face.updateRenderData();
-				graphics.lineStyle(0.1, 0x888888);
+				//graphics.lineStyle(0.1, 0x888888);
+				
+				if (face.texture == null) {
+					trace('null texture detected :: ', i);
+					face.texture = new BitmapData(10, 10, false, Math.random()*0xffffff);
+				}
+				
 				graphics.beginBitmapFill(face.texture);
-				graphics.drawTriangles(face.renderData, face.indices, face.uv, TriangleCulling.NONE);
+				graphics.drawTriangles(face.renderData, face.indices, face.uv, TriangleCulling.POSITIVE);
 			}
 		}
 		

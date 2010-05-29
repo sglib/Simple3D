@@ -46,11 +46,11 @@ package
 			s3d.add(m3d);
 		}
 		
-		override protected function _enterframe(e:Event):void 
-		{
-			m3d.rotation.y += 0.05;
-			s3d.world.rotation.x = stage.mouseY / stage.stageHeight * Math.PI/2-Math.PI/4;
-		}
+		//override protected function _enterframe(e:Event):void 
+		//{
+			//m3d.rotation.y += 0.05;
+			//s3d.world.rotation.x = stage.mouseY / stage.stageHeight * Math.PI/2-Math.PI/4;
+		//}
 		
 	}
 

@@ -19,7 +19,7 @@ package
 		
 		override public function setup3d():void 
 		{
-			kappa = new Kappa();
+			kappa = new Kappa(bm);
 			
 			s3d.add(kappa);
 		}

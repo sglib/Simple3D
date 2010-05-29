@@ -17,14 +17,14 @@ package
 		public var s3d	: Simple3D;
 		public var bm	: BitmapData;
 		
-		//[Embed(source="DINO_2.GIF")]
-		//private var DINO	: Class;
+		[Embed(source="kappa.png")]
+		private var DINO	: Class;
 		
 		public function Simple3DTest() 
 		{
 			s3d = new Simple3D();
-			bm = new BitmapData(640, 480, false, 0xff5555ff);
-			//(new DINO() as Bitmap).bitmapData;
+			bm = //new BitmapData(640, 480, false, 0xff5555ff);
+			(new DINO() as Bitmap).bitmapData;
 			
 			addChild(s3d);			
 			s3d.x = stage.stageWidth / 2;
@@ -47,9 +47,9 @@ package
 			if (d.update == 0) {
 				d.data = { mx : stage.mouseX, my : stage.mouseY, rx : s3d.world.rotation.x, ry: ty };
 			}
-			trace(ty);
+			
 			ty = (stage.mouseX - d.data.mx) * Math.PI / stage.stageWidth + d.data.ry;
-			//s3d.world.rotation.x = (stage.mouseY - d.data.my) * Math.PI / stage.stageHeight + d.data.rx;	
+			//s3d.world.rotation.x = -(stage.mouseY - d.data.my) * Math.PI/4 / stage.stageHeight + d.data.rx;	
 		}
 		
 		public function setup3d():void

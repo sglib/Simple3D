@@ -1,6 +1,8 @@
 package simple3d.core 
 {
 	import flash.display.BitmapData;
+	import flash.display.GradientType;
+	import flash.display.Shape;
 	/**
 	 * @version 0.1.0
 	 * @author thienhaflash (thienhaflash@gmail.com)
@@ -8,8 +10,11 @@ package simple3d.core
 	 */
 	public class ExModel extends Object3D
 	{
-		protected var vDat : Array;//vertices
-		protected var fDat : Array;//faces
+		protected var vDat	: Array;//vertices
+		protected var fDat	: Array;//faces
+		protected var uv	: Array;
+		
+		public var material : BitmapData;
 		
 		public function ExModel() 
 		{
@@ -17,6 +22,7 @@ package simple3d.core
 			parse();
 			fDat = null;
 			vDat = null;
+			uv = null;
 		}
 		
 		protected function _setData():void {
@@ -33,13 +39,16 @@ package simple3d.core
 			}
 			
 			var l : int = fDat.length;
-			
+			var k : int;
+				
 			for (i = 0; i < l; i++) {
 				di = fDat[i];
-				_faces.push(new Polygon(
-								new BitmapData(10, 10, false, Math.random() * 0xffffff), 
-								Vector.<Vertex>([_vertices[di[0]-1], _vertices[di[1]-1], _vertices[di[2]-1]])
+				_faces.push(new Polygon(material,
+								Vector.<Vertex>([_vertices[di[0] - 1], _vertices[di[1] - 1], _vertices[di[2] - 1]]),
+								Vector.<int>([0,2,1]),
+								Vector.<Number>([uv[k][0], 1-uv[k][1], uv[k+1][0], 1-uv[k+1][1], uv[k+2][0], 1-uv[k+2][1]])
 							));
+				k += 3;
 			}
 		}
 		
