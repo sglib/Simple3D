@@ -1,8 +1,11 @@
 package test.app
 {
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.events.Event;
 	import simple3d.app.Book3D;
 	import simple3d.core.Container3D;
+	import simple3d.core.Object3D;
 	import simple3d.core.Vertex;
 	import simple3d.primity.Cube;
 	import simple3d.primity.Plane;
@@ -22,26 +25,31 @@ package test.app
 		
 		protected var b3d : Book3D;
 		
-		override public function setup3d():void 
+		override public function setup3d():Object3D 
 		{
-			b3d = new Book3D(null, 400, 200);
-			var p : Plane = new Plane(null, 200, 200);
+			b3d = new Book3D(null, 400, 400);
+			
+			var bmd : BitmapData = new BitmapData(100, 100, false, Math.random() * 0xffffff);
+			
+			var p : Plane = new Plane(null, 200, 200, bmd);
 			p.x = 100;
 			p.y = 100;
 			b3d.add(p);
 			
-			p = new Plane(null, 200, 200);
+			
+			
+			p = new Plane(null, 200, 200, bmd);
 			p.x = -100;
 			p.y = 100;
 			b3d.add(p);
 			
-			p = new Plane(null, 200, 200);
+			p = new Plane(null, 200, 200, bmd);
 			p.z = -100;
 			p.y = 100;
 			p.rotation.y = Math.PI / 2;
 			b3d.add(p);
 			
-			p = new Plane(null, 200, 200);
+			p = new Plane(null, 200, 200, bmd);
 			p.z = 100;
 			p.y = 100;
 			p.rotation.y = Math.PI / 2;
@@ -63,7 +71,7 @@ package test.app
 			
 			b3d.y = -200;
 			
-			s3d.add(b3d);
+			return b3d;
 		}
 		
 		override protected function _enterframe(e:Event):void 

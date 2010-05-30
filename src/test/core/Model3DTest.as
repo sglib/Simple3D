@@ -1,7 +1,9 @@
 package test.core
 {
+	import flash.display.BitmapData;
 	import flash.events.Event;
 	import simple3d.core.Model3D;
+	import simple3d.core.Object3D;
 	import simple3d.primity.Plane;
 	/**
 	 * @version 0.1.0
@@ -18,32 +20,35 @@ package test.core
 		
 		protected var m3d : Model3D;
 		
-		override public function setup3d():void 
+		override public function setup3d():Object3D 
 		{
 			m3d = new Model3D();
-			var p : Plane = new Plane(null, 200, 200);
+			
+			m3d.useWelder = true;
+			
+			var p : Plane = new Plane(null, 200, 200, new BitmapData(100, 100, false, Math.random() * 0xffffff));
 			p.x = 100;
-			p.y = -50;
+			//p.y = -50;
 			m3d.add(p);
 			
-			p = new Plane(null, 200, 200);
+			p = new Plane(null, 200, 200, new BitmapData(100, 100, false, Math.random() * 0xffffff));
 			p.x = -100;
-			p.y = 50;
+			//p.y = 50;
 			m3d.add(p);
 			
-			p = new Plane(null, 200, 200);
+			p = new Plane(null, 200, 200, new BitmapData(100, 100, false, Math.random() * 0xffffff));
 			p.z = -100;
-			p.y = 0;
+			//p.y = 0;
 			p.rotation.y = Math.PI / 2;
 			m3d.add(p);
 			
-			p = new Plane(null, 200, 200);
+			p = new Plane(null, 200, 200, new BitmapData(100, 100, false, Math.random() * 0xffffff));
 			p.z = 100;
-			p.y = 100;
+			//p.y = 100;
 			p.rotation.y = Math.PI / 2;
 			m3d.add(p);
 			
-			s3d.add(m3d);
+			return m3d;
 		}
 		
 	}

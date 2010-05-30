@@ -2,6 +2,7 @@ package simple3d.core
 {
 	import flash.utils.Dictionary;
 	import simple3d.core.Polygon;
+	import simple3d.utils.MathUtils;
 	import simple3d.utils.VectorUtils;
 	/**
 	 * @version 0.1.0
@@ -53,6 +54,8 @@ package simple3d.core
 			for (var i: int = 0; i < l; i++) {//update children's transform also
 				(_children[i] as Object3D).updateTransform();
 			}
+			
+			//MathUtils.transVertices(transG, _vertices)
 		}
 		
 		override public function get faces():Vector.<Polygon> { 

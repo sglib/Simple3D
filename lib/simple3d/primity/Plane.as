@@ -11,7 +11,7 @@ package simple3d.primity
 	 */
 	public class Plane extends Object3D
 	{
-		public function Plane(ptexture: BitmapData, pw: int = 0, ph: int = 0) 
+		public function Plane(ptexture: BitmapData, pw: int = 0, ph: int = 0, ptexture2: BitmapData = null) 
 		{
 			if (pw == 0) pw = ptexture.width;
 			if (ph == 0) ph = ptexture.height;
@@ -19,9 +19,22 @@ package simple3d.primity
 			var hw	: int = pw / 2;
 			var hh	: int = ph / 2;
 			
-			var vv: Vector.<Vertex> = Vector.<Vertex>([new Vertex( -hw, -hh), new Vertex(hw, -hh), new Vertex(hw, hh), new Vertex( -hw, hh)]);
-			var vp : Vector.<Polygon> = Vector.<Polygon>([new Polygon(ptexture, vv), new Polygon(ptexture, Vector.<Vertex>([vv[1], vv[0], vv[3], vv[2]]))]);
-			
+			var vv: Vector.<Vertex> = Vector.<Vertex>([new Vertex( -hw, -hh), new Vertex( -hw, hh), new Vertex(hw, hh), new Vertex(hw, -hh)]);
+			var vp : Vector.<Polygon> = 
+				ptexture2 ? Vector.<Polygon>([new Polygon(ptexture, vv //dual faces
+												, Vector.<int>([0, 1, 2, 0, 2, 3])
+												, Vector.<Number>([0, 0, 0, 1, 1, 1, 1, 0 ]))
+											, new Polygon(ptexture2, vv
+												, Vector.<int>([0, 2, 1, 0, 3, 2])
+												, Vector.<Number>([1, 0, 1, 1, 0, 1, 0, 0 ]))//flip horizontal
+											])
+											
+						  : Vector.<Polygon>([
+									new Polygon(ptexture, vv
+														, Vector.<int>([0, 1, 2, 0, 2, 3])
+														, Vector.<Number>([0, 0, 0, 1, 1, 1, 1, 0 ])
+												)
+											]); //single face
 			super(vv, vp);
 		}
 		

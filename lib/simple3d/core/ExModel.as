@@ -1,5 +1,6 @@
 package simple3d.core 
 {
+	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.GradientType;
 	import flash.display.Shape;
@@ -16,8 +17,9 @@ package simple3d.core
 		
 		public var material : BitmapData;
 		
-		public function ExModel() 
+		public function ExModel(cls: Class) 
 		{
+			material = (new cls() as Bitmap).bitmapData;
 			_setData();
 			parse();
 			fDat = null;

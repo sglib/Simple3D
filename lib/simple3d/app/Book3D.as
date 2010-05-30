@@ -3,6 +3,8 @@ package simple3d.app
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.geom.Matrix;
+	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	import flash.geom.Vector3D;
 	import simple3d.core.Container3D;
 	import simple3d.core.Model3D;
@@ -27,25 +29,37 @@ package simple3d.app
 		
 		public var _facesObject		: Vector.<Polygon>;
 		
-		public function Book3D(bm : BitmapData, w : int, h: int) 
+		public function Book3D(bm : BitmapData, w : int = -1, h: int = -1) 
 		{
 			super();			
 			angle = Math.PI;
 			
 			_facesObject = new Vector.<Polygon>;
 			
-			leftPage = new Plane(new BitmapData(w, h, false, 0x0000ff), w, h);
-			leftPage.x = -w/4;
-			leftPage.rotation.y = Math.PI / 2;
-			leftPage.rotation.z = Math.PI / 2;
+			if (w == -1) w = bm.width;
+			if (h == -1) h = bm.height;
+			if (bm == null) bm = new BitmapData(w * 2, h, false, Math.random() * 0xffffff);
 			
-			rightPage = new Plane(new BitmapData(w, h, false, 0xff0000), w, h);
-			rightPage.x = w/4;
-			rightPage.rotation.y = Math.PI / 2;
-			rightPage.rotation.z = Math.PI / 2;
+			var hw : int = w >> 1;
 			
-			add(leftPage);
+			var bm1 : BitmapData = new BitmapData(hw, h, bm.transparent);
+			bm1.copyPixels(bm, new Rectangle(0,0, hw, h), new Point(0,0));
+			
+			leftPage = new Plane(bm1, hw, h, new BitmapData(hw, h, false, 0x0000ff));
+			leftPage.x = -w / 4 ;
+			leftPage.rotation.x = -Math.PI / 2;
+			
+			var bm2 : BitmapData = new BitmapData(hw, h, bm.transparent);
+			bm2.copyPixels(bm, new Rectangle(hw, 0, hw, h), new Point(0, 0));
+			
+			rightPage = new Plane(bm2, hw, h, new BitmapData(hw, h, false, 0x0000ff));
+			rightPage.x = w / 4;
+			rightPage.rotation.x = -Math.PI / 2;
+			
+			add(leftPage);//2 points will be welded here
+			_useWelder = true;
 			add(rightPage);
+			_useWelder = false;//no need to weld other objects' vertices
 		}
 		
 		override public function add(o:Object3D):void 
@@ -83,17 +97,17 @@ package simple3d.app
 				VectorUtils.sortFaces(_facesObject);
 				_faces = new Vector.<Polygon>();
 				
-				//WISE Plane sorting
+				//WISE Plane sorting : dual faces planes
 				if (leftFirst) {
 					_faces.push(leftPage.faces[0]);
 					_faces.push(rightPage.faces[0]);
-					VectorUtils.appendPolygon(_faces, _facesObject);
+					if (angle < Math.PI) VectorUtils.appendPolygon(_faces, _facesObject);
 					_faces.push(leftPage.faces[1]);
 					_faces.push(rightPage.faces[1]);
 				} else {
 					_faces.push(rightPage.faces[0]);
 					_faces.push(leftPage.faces[0]);
-					VectorUtils.appendPolygon(_faces, _facesObject);
+					if (angle < Math.PI) VectorUtils.appendPolygon(_faces, _facesObject);//
 					_faces.push(rightPage.faces[1]);
 					_faces.push(leftPage.faces[1]);
 				}

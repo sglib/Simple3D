@@ -1,5 +1,6 @@
 package simple3d.utils 
 {
+	import flash.utils.Dictionary;
 	import simple3d.core.Object3D;
 	import simple3d.core.Polygon;
 	import simple3d.core.Vertex;
@@ -41,6 +42,19 @@ package simple3d.utils
 				pa[i] = pb[i];
 			}
 			return pa;
+		}
+		
+		public static function replacePolygonVertices(v: Vertex, nv : Vertex, pfaces: Vector.<Polygon>): void {
+			if (!nv) return;
+			
+			var vv	: Vector.<Vertex>;
+			
+			for (var i: int = 0; i < pfaces.length; i++) {
+				vv = pfaces[i].vertices;
+				for (var j: int = 0; j < vv.length; j ++) {
+					if (v == vv[j]) vv[j] = nv;
+				}
+			}
 		}
 		
 		public static function sortFaces(faces: Vector.<Polygon>):Vector.<Polygon> {

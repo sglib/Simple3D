@@ -22,27 +22,35 @@ package simple3d
 		public var camZ		: Number = -900;
 		public var zoom		: Number = 10;//default values make objects at it correct size when z=0
 		
+		private var root3d	: Container3D;
 		public var world	: Container3D;
 		public var faces	: Vector.<Polygon>;
+		
+		public var showGrid		: Boolean = false;
+		public var showTexture	: Boolean = true;
 		
 		public function Simple3D() 
 		{
 			addEventListener(Event.ENTER_FRAME, _render);
+			root3d = new Container3D();
 			world = new Container3D();
+			root3d.add(world);
 		}
 		
 		private function _render(e:Event):void 
 		{
 			graphics.clear();
 			
-			var vertices	: Vector.<Vertex> = world.vertices;
+			//trace('rendering :: ', vertices.length);
+			
+			var vertices	: Vector.<Vertex> = root3d.vertices;
 			var v			: Vertex;
 			var face		: Polygon;
 			var f			: Number;
 			
-			world.updateTransform();//apply transform on vertices
+			root3d.updateTransform();//apply transform on vertices
 			
-			var tmpZ : int = focus + world.z - camZ;
+			var tmpZ : int = focus - camZ;
 			
 			//do project
 			for (var i: int = 0; i < vertices.length; i++) {
@@ -50,28 +58,25 @@ package simple3d
 				
 				f = focus / (tmpZ + v.tz);
 				
-				v.tx += world.x;//is this the bug ?
-				v.ty += world.y;
-				
 				v.gx = f * v.tx * zoom;
 				v.gy = f * v.ty * zoom;
 			}
 			
-			faces = world.faces;
+			faces = root3d.faces;
 			
 			var l : int = faces.length;
 			
 			for (i = 0; i < l ; i++) {
 				face = faces[i];
 				face.updateRenderData();
-				graphics.lineStyle(0.1, 0xff0000);
+				if (showGrid) graphics.lineStyle(0.1, 0xff0000);
 				
 				if (face.texture == null) {
 					//trace('null texture detected :: ', i);
 					face.texture = new BitmapData(10, 10, false, Math.random()*0xffffff);
 				}
 				
-				graphics.beginBitmapFill(face.texture);
+				if (showTexture) graphics.beginBitmapFill(face.texture);
 				graphics.drawTriangles(face.renderData, face.indices, face.uv, TriangleCulling.POSITIVE);
 			}
 		}

@@ -2,6 +2,7 @@ package test.core
 {
 	import flash.events.Event;
 	import model.Kappa;
+	import simple3d.core.Object3D;
 	/**
 	 * @version 0.1.0
 	 * @author thienhaflash (thienhaflash@gmail.com)
@@ -18,11 +19,12 @@ package test.core
 		
 		protected var kappa : Kappa;
 		
-		override public function setup3d():void 
+		override public function setup3d():Object3D 
 		{
 			kappa = new Kappa();
-			s3d.add(kappa);
+			kappa.rotation.y = Math.PI / 2;
 			kappa.y = -200;
+			return kappa
 		}
 	}
 

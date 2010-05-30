@@ -1,6 +1,7 @@
 package test.app
 {
 	import aze.motion.eaze;
+	import flash.display.Bitmap;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import model.Kappa;
@@ -21,16 +22,24 @@ package test.app
 		
 		protected var b3d : Book3D;
 		
-		override public function setup3d():void 
+		[Embed(source = "../../../assets/bookBg.jpg")]
+		protected var BookBg : Class;
+		
+		override public function setup3d():Object3D 
 		{
-			b3d = new Book3D(null, 600, 300);
+			s3d.showGrid = true;
+			//s3d.showTexture = false;
+			
+			
+			b3d = new Book3D((new BookBg() as Bitmap).bitmapData);
 			var kappa : Kappa = new Kappa();
 			b3d.add(kappa);
 			
 			b3d.y = -200;
 			
-			s3d.add(b3d);
 			stage.addEventListener(MouseEvent.CLICK, onClick);
+			
+			return b3d;
 		}
 		
 		protected var _open : Boolean;
@@ -39,12 +48,6 @@ package test.app
 			_open = !_open;
 			eaze(b3d).to(1, { angle : _open ? Math.PI : 0 } );
 		}
-		
-		override protected function _enterframe(e:Event):void 
-		{
-			super._enterframe(e);
-		}
-		
 	}
 
 }

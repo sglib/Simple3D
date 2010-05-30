@@ -1,6 +1,7 @@
 package test.primity
 {
 	import flash.events.Event;
+	import simple3d.core.Object3D;
 	import simple3d.primity.Cube;
 	/**
 	 * @version 0.1.0
@@ -16,23 +17,11 @@ package test.primity
 			
 		}
 		
-		override public function setup3d():void 
+		override public function setup3d():Object3D 
 		{
 			cube = new Cube(null, 200, 200, 200);
-			s3d.add(cube);
+			return cube;
 		}
-		
-		override protected function _enterframe(e:Event):void 
-		{
-			//cube.rotation.x += 0.05;
-			//cube.rotation.y += 0.05;
-			//cube.rotation.z += 0.05;
-			
-			cube.z = 200;
-			
-			super._enterframe(null);
-		}
-		
 	}
 
 }

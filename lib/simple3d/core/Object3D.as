@@ -62,17 +62,7 @@ package simple3d.core
 			//parent only call children's update transform if its transform is dirty
 			//means that child's transG is always dirty and need to be updated
 			VectorUtils.copyNumber(transG, transL);
-			if (parent) {
-				MathUtils.prependTrans(parent.transG, transG);
-				//MathUtils.transVertex(parent.transG, this);
-			} 
-			
-			//else {//append itself transform viewed from an empty non rotated / non moved parent
-				//var tmp : Vector.<Number> = new Matrix3D().rawData;
-				//MathUtils.findTrans(tmp, new V3D(), new V3D(x, y, z));
-				//trace('non parent :: ', tmp);
-				//MathUtils.prependTrans(tmp, transG);
-			//}
+			if (parent) MathUtils.prependTrans(parent.transG, transG);
 			
 			MathUtils.transVertex(transG, this);
 			

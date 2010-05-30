@@ -18,8 +18,7 @@ package model
 		
 		public function Kappa() 
 		{
-			material = (new bitmapCls() as Bitmap).bitmapData;
-			super();
+			super(bitmapCls);
 		}
 		
 		override protected function _setData():void 
