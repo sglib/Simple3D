@@ -27,9 +27,8 @@ package test.app
 		
 		override public function setup3d():Object3D 
 		{
-			s3d.showGrid = true;
+			//s3d.showGrid = true;
 			//s3d.showTexture = false;
-			
 			
 			b3d = new Book3D((new BookBg() as Bitmap).bitmapData);
 			var kappa : Kappa = new Kappa();
