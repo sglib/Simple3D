@@ -1,0 +1,4 @@
+1. Parse from DAE file :
+	+ DAE file use Vertices (V), UV, and polygon data (P), Normal (N) - not sure if N has any usage
+	+ P usually contains 3 element sequenced in the v-n-uv format
+	+ In polygon data v is index of the vertice in V array, uv is the uv data for that vetices in UV array

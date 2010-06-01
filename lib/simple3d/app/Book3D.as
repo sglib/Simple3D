@@ -60,6 +60,9 @@ package simple3d.app
 			_useWelder = true;
 			add(rightPage);
 			_useWelder = false;//no need to weld other objects' vertices
+			
+			//rightPage.vertices[0].oy = 50;
+			//rightPage.vertices[1].oy = 50;
 		}
 		
 		override public function add(o:Object3D):void 

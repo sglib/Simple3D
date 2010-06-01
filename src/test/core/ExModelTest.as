@@ -1,6 +1,8 @@
 package test.core
 {
 	import flash.events.Event;
+	import model.Ball;
+	import model.Car;
 	import model.Cow;
 	import model.Kappa;
 	import simple3d.core.Container3D;
@@ -13,33 +15,19 @@ package test.core
 	 */
 	public class ExModelTest extends Simple3DTest
 	{
-		
-		
 		public function ExModelTest() 
 		{
-			
+			target.y = -200;
 		}
-		
-		protected var kappa : Kappa;
-		protected var cow	: Cow;
 		
 		override public function setup3d():Object3D 
 		{
-			s3d.showGrid = true;
+			//s3d.showGrid = true;
 			
-			var m3d : Model3D = new Model3D();
-			
-			kappa = new Kappa();
-			kappa.y = -200;
-			
-			cow = new Cow(100);
-			cow.y = -200;
-			
-			m3d.add(kappa);
-			m3d.add(cow);
-			
-			//return kappa;
-			return m3d;
+			return new Kappa();
+			//return new Ball();
+			//return new Cow();
+			//return new Car();
 		}
 	}
 
