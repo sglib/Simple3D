@@ -40,18 +40,22 @@ package simple3d.core
 			}
 			
 			l = pIndices.length;
+			var uvf : Number = 1;
 			for (i = 0; i < l; i += 6) {
 				_faces.push(new Polygon(texture,
 						Vector.<Vertex>([
 										vertices[pIndices[i]], vertices[pIndices[i + 2]], vertices[pIndices[i + 4]]
 									]),
 						Vector.<int>([0,1,2]),//adjust normal ???
-						Vector.<Number>([	puv[pIndices[i + 1] * 2], 1 - puv[pIndices[i +1] * 2 + 1]
-										,	puv[pIndices[i + 3] * 2], 1 - puv[pIndices[i + 3] * 2 + 1]
-										,	puv[pIndices[i + 5] * 2], 1 - puv[pIndices[i + 5] * 2 + 1]
+						Vector.<Number>([	puv[pIndices[i + 1] * 2]*uvf, 1 - puv[pIndices[i +1] * 2 + 1]*uvf
+										,	puv[pIndices[i + 3] * 2]*uvf, 1 - puv[pIndices[i + 3] * 2 + 1]*uvf
+										,	puv[pIndices[i + 5] * 2]*uvf, 1 - puv[pIndices[i + 5] * 2 + 1]*uvf
 									])
 						));
 			}
+			
+			_vertices.fixed = true;
+			_faces.fixed = true;
 		}
 		
 		

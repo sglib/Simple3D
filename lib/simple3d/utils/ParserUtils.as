@@ -11,58 +11,6 @@ package simple3d.utils
 	 */
 	public class ParserUtils
 	{
-		
-		//public static function fromRoxik(pvtx: Array, ptriangle: Array, puv: Array, ptexture: BitmapData, pscale: Number = 0.1, poffset:V3D = null):void {
-			//var l0	: int = pvtx.length;
-			//var di	: Array;
-			//
-			//vertices = new Vector.<Vertex>();
-			//faces = new Vector.<Polygon>();
-			//if (!poffset) poffset = new V3D();
-			//
-			//for (var i: int = 0; i < l0; i++ ) {
-				//di = pvtx[i];
-				//vertices.push(new Vertex(di[0] * pscale + poffset.x, -di[1] * pscale + poffset.y, di[2] * pscale + poffset.z));
-			//}
-			//
-			//var l : int = ptriangle.length;
-			//var k : int;
-				//
-			//for (i = 0; i < l; i++) {
-				//di = ptriangle[i];
-				//faces.push(new Polygon(ptexture,
-								//Vector.<Vertex>([vertices[di[0] - 1], vertices[di[1] - 1], vertices[di[2] - 1]]),
-								//Vector.<int>([0,2,1]),
-								//Vector.<Number>([puv[k][0], 1-puv[k][1], puv[k+1][0], 1-puv[k+1][1], puv[k+2][0], 1-puv[k+2][1]])
-							//));
-				//k += 3;
-			//}
-		//}
-		
-		//public static function fromRoxik(pdelta: int, pvtx: Array): Array {
-			//var arr : Array = [];
-			//var l	: int = pvtx.length;
-			//var is3	: Boolean = pvtx[0].length == 3;
-			//var tmp : Array;
-			//
-			//for (var i: int = 0; i < l; i++) {
-				//tmp = pvtx[i];
-				//is3 ? arr.push(tmp[0]+pdelta, tmp[1]+pdelta, tmp[2]+pdelta) : arr.push(tmp[0], tmp[1]);
-			//}
-			//trace('roxik :: ', pvtx.length, "[", arr,']');
-			//return arr;
-		//}
-		
-		//public static function uvRoxik(ppolygon: Array): Array {
-			//var arr : Array = [];
-			//var l : int = ppolygon.length;
-			//
-			//for (var i: int = 0; i < l; i ++) {
-				//arr.push(ppolygon[i], i);
-			//}
-			//return arr;
-		//}
-		
 		public static function roxik_uv(puv : Array): Array {
 			var l	: int = puv.length;
 			var arr : Array = [];
@@ -87,10 +35,32 @@ package simple3d.utils
 			var l	: int = pindices.length;
 			var arr : Array = [];
 			for (var i: int = 0; i < l; i++) {
-				//arr.push(pindices[i][0]-1, i * 3, pindices[i][1]-1, i * 3 + 1, pindices[i][2]-1, i * 3 + 2);
 				arr.push(pindices[i][0]-1, i * 3, pindices[i][2]-1, i * 3 + 2, pindices[i][1]-1, i * 3 + 1);
 			}
 			trace('Roxik Indices :: [', arr,']');
+			return arr;
+		}
+		
+		public static function traceMaxMin(arr: Array):Array {
+			var maxX : Number = 0;
+			var maxY : Number = 0;
+			var maxZ : Number = 0;
+			var minX : Number = 100;
+			var minY : Number = 100;
+			var minZ : Number = 100;
+			
+			var l: int = arr.length;
+			
+			for (var i: int = 0; i < l; i += 3) {
+				maxX = Math.max(maxX, arr[i]);
+				maxY = Math.max(maxY, arr[i+1]);
+				maxZ = Math.max(maxZ, arr[i+2]);
+				minX = Math.min(minX, arr[i]);
+				minY = Math.min(minY, arr[i+1]);
+				minZ = Math.min(minZ, arr[i+2]);
+			}
+			//trace(maxX, minX, maxY, minY, maxZ, minZ);
+			trace('Translate Vector :: ' + -(maxX + minX) / 2 + ',' + -(maxY + minY) / 2 + ',' + -(maxZ + minZ) / 2);
 			return arr;
 		}
 		

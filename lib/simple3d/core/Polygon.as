@@ -32,8 +32,8 @@ package simple3d.core
 			}
 			
 			//if (texture == null) trace('null texture :: need to create one');
-			//uv.fixed = true;
-			//vertices.fixed = true;
+			uv.fixed = true;
+			vertices.fixed = true;
 		}
 		
 		public function updateRenderData():void {
